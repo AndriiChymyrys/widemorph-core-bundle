@@ -1,0 +1,8 @@
+{
+    "name": "widemorph/morph-core-bundle",
+    "autoload": {
+        "psr-4": {
+            "WideMorph\\Morph\\Bundle\\MorphCoreBundle\\": ""
+        }
+    }
+}
