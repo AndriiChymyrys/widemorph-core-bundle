@@ -10,5 +10,31 @@
         </service>
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactory"/>
+        <!-- RequestValidation -->
+        <service
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\RequestValidationContext">
+        </service>
+        <service
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\RequestValidationContextInterface"
+                alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\RequestValidationContext"/>
+
+        <service
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy\ConstraintValidationStrategy">
+            <argument type="service" key="$validator" id="Symfony\Component\Validator\Validator\ValidatorInterface"/>
+        </service>
+        <service
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy\ConstraintValidationStrategyInterface"
+                alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy\ConstraintValidationStrategy"/>
+
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidationService">
+            <argument type="service" key="$requestStack" id="Symfony\Component\HttpFoundation\RequestStack"/>
+            <argument type="service" key="$requestValidationContext"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\RequestValidationContextInterface"/>
+            <argument type="service" key="$requestValidationStrategy"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy\ConstraintValidationStrategyInterface"/>
+        </service>
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidationServiceInterface"
+                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidationService"/>
+        <!-- RequestValidation -->
     </services>
 </container>
