@@ -11,6 +11,6 @@ use Exception;
  *
  * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception
  */
-class RequestValidationStrategyException extends Exception
+class ConstraintValidationStrategyException extends Exception
 {
 }

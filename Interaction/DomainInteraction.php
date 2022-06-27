@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Interaction;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidationServiceInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface;
 
 /**
  * Class DomainInteraction
@@ -16,11 +16,11 @@ class DomainInteraction implements DomainInteractionInterface
 {
     /**
      * @param EntityResolverFactoryInterface $entityResolverFactory
-     * @param RequestValidationServiceInterface $requestValidationService
+     * @param ConstraintValidationServiceInterface $constraintValidationService
      */
     public function __construct(
         protected EntityResolverFactoryInterface $entityResolverFactory,
-        protected RequestValidationServiceInterface $requestValidationService
+        protected ConstraintValidationServiceInterface $constraintValidationService
     ) {
     }
 
@@ -35,8 +35,8 @@ class DomainInteraction implements DomainInteractionInterface
     /**
      * {@inheritDoc}
      */
-    public function getRequestValidationService(): RequestValidationServiceInterface
+    public function getConstraintValidationService(): ConstraintValidationServiceInterface
     {
-        return $this->requestValidationService;
+        return $this->constraintValidationService;
     }
 }

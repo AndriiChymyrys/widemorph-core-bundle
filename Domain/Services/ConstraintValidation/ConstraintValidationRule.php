@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud;
+namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation;
 
 use Symfony\Component\Validator\ConstraintViolationList;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\Contracts\ConstraintValidationRulesInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\ConstraintValidationRulesInterface;
 
 /**
  * Class ConstraintValidationRule

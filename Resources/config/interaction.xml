@@ -8,8 +8,8 @@
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\DomainInteraction">
             <argument type="service" key="$entityResolverFactory"
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface"/>
-            <argument type="service" key="$requestValidationService"
-                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidationServiceInterface"/>
+            <argument type="service" key="$constraintValidationService"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface"/>
         </service>
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\DomainInteractionInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\DomainInteraction"/>

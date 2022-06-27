@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy;
+namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\Strategy;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\Contracts\InputDataInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\Contracts\ConstraintValidationRulesInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\ConstraintValidationRulesInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\InputDataCollectionInterface;
 
 /**
  * Class ConstraintValidationStrategy
  *
- * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy
+ * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\Strategy
  */
 class ConstraintValidationStrategy implements ConstraintValidationStrategyInterface
 {
@@ -34,11 +34,11 @@ class ConstraintValidationStrategy implements ConstraintValidationStrategyInterf
     /**
      * {@inheritDoc}
      */
-    public function execute(ConstraintValidationRulesInterface $rules, InputDataInterface $inputData): void
+    public function execute(ConstraintValidationRulesInterface $rules, InputDataCollectionInterface $inputData): void
     {
         $validationGroups = $this->getValidationGroup($rules);
 
-        $violations = $this->validator->validate($inputData->all(), $rules->getConstraints(), $validationGroups);
+        $violations = $this->validator->validate($inputData->toArray(), $rules->getConstraints(), $validationGroups);
 
         $rules->setViolationList($violations);
     }

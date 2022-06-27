@@ -10,31 +10,36 @@
         </service>
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactory"/>
-        <!-- RequestValidation -->
+        <!-- ConstraintValidation -->
         <service
-                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\RequestValidationContext">
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationContext">
         </service>
         <service
-                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\RequestValidationContextInterface"
-                alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\RequestValidationContext"/>
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationContextInterface"
+                alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationContext"/>
 
         <service
-                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy\ConstraintValidationStrategy">
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\Strategy\ConstraintValidationStrategy">
             <argument type="service" key="$validator" id="Symfony\Component\Validator\Validator\ValidatorInterface"/>
         </service>
         <service
-                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy\ConstraintValidationStrategyInterface"
-                alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy\ConstraintValidationStrategy"/>
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\Strategy\ConstraintValidationStrategyInterface"
+                alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\Strategy\ConstraintValidationStrategy"/>
 
-        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidationService">
-            <argument type="service" key="$requestStack" id="Symfony\Component\HttpFoundation\RequestStack"/>
-            <argument type="service" key="$requestValidationContext"
-                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\RequestValidationContextInterface"/>
-            <argument type="service" key="$requestValidationStrategy"
-                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidation\Strategy\ConstraintValidationStrategyInterface"/>
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationService">
+            <argument type="service" key="$constraintValidationContext"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationContextInterface"/>
+            <argument type="service" key="$constraintValidationStrategy"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\Strategy\ConstraintValidationStrategyInterface"/>
         </service>
-        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidationServiceInterface"
-                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Crud\RequestValidationService"/>
-        <!-- RequestValidation -->
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface"
+                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationService"/>
+        <!-- ConstraintValidation -->
+
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactory">
+            <argument type="service" key="$requestStack" id="Symfony\Component\HttpFoundation\RequestStack"/>
+        </service>
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactoryInterface"
+                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactory"/>
     </services>
 </container>
