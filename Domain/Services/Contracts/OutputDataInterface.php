@@ -9,6 +9,6 @@ namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts;
  *
  * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts
  */
-interface ResponseDataInterface
+interface OutputDataInterface
 {
 }

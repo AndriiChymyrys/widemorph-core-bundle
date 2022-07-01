@@ -8,6 +8,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\SelectDataSourceDefinitionInterface;
 
 /**
  * Class MorphCoreExtension
@@ -21,6 +22,9 @@ class MorphCoreExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $container->registerForAutoconfiguration(SelectDataSourceDefinitionInterface::class)
+            ->addTag(SelectDataSourceDefinitionInterface::SERVICE_TAG_NAME);
+
         $loader = new XmlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../../Resources/config')

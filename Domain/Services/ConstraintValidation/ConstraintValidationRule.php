@@ -34,4 +34,12 @@ abstract class ConstraintValidationRule implements ConstraintValidationRulesInte
     {
         $this->constraintViolationList = $constraintViolationList;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getViolationList(): ConstraintViolationList
+    {
+        return $this->constraintViolationList;
+    }
 }

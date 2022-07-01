@@ -30,4 +30,9 @@ interface ConstraintValidationRulesInterface
      * @return void
      */
     public function setViolationList(ConstraintViolationList $constraintViolationList): void;
+
+    /**
+     * @return ConstraintViolationList
+     */
+    public function getViolationList(): ConstraintViolationList;
 }
