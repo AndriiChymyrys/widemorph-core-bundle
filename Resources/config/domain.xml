@@ -44,6 +44,11 @@
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactoryInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactory"/>
 
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataFactory">
+        </service>
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataFactoryInterface"
+                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataFactory"/>
+
         <!-- DataSource -->
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistry">
         </service>
@@ -51,13 +56,19 @@
                 id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface"
                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistry"/>
 
-        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceService">
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\AbstractDataSourceService">
             <argument type="service" key="$dataSourceRegistry"
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface"/>
             <argument type="service" key="$inputDataFactory"
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactoryInterface"/>
             <argument type="service" key="$constraintValidationService"
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface"/>
+            <argument type="service" key="$outputDataFactory"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataFactoryInterface"/>
+        </service>
+
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceService"
+                 parent="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\AbstractDataSourceService">
         </service>
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceService"/>

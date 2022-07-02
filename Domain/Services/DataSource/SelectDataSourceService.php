@@ -4,31 +4,37 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource;
 
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactoryInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface;
 
-class SelectDataSourceService implements SelectDataSourceServiceInterface
+/**
+ * Class SelectDataSourceService
+ *
+ * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource
+ */
+class SelectDataSourceService extends AbstractDataSourceService implements SelectDataSourceServiceInterface
 {
-    public function __construct(
-        protected DataSourceRegistryInterface $dataSourceRegistry,
-        protected InputDataFactoryInterface $inputDataFactory,
-        protected ConstraintValidationServiceInterface $constraintValidationService
-    ) {
-    }
-
-    public function execute(string $sourceName)
+    /**
+     * @param string $sourceName
+     *
+     * @return OutputDataInterface
+     */
+    public function execute(string $sourceName): OutputDataInterface
     {
-        $source = $this->dataSourceRegistry->get(DataSourceRegistryInterface::SELECT_DATA_SOURCE_NAME, $sourceName);
+        $selectSource = $this->dataSourceRegistry->get(DataSourceRegistryInterface::SELECT_DATA_SOURCE_NAME, $sourceName);
+        $outputData = $this->outputDataFactory->createOutputData();
+        $inputData = $this->inputDataFactory->fromRequest();
 
-        if ($constraint = $source->getConstraint()) {
-            $inputData = $this->constraintValidationService->validate($constraint, $this->inputDataFactory->fromRequest());
+        if ($constraint = $selectSource->getConstraint()) {
+            $this->constraintValidationService->validate($constraint, $inputData);
 
             if ($constraint->getViolationList()->count()) {
-
+                return $outputData->setErrors($this->violationListToArray($constraint->getViolationList()));
             }
         }
 
-//        var_dump($constraint);
+        $source = $selectSource->getSource();
+
+        return $outputData->setSourceData($source->select($inputData));
     }
 }
