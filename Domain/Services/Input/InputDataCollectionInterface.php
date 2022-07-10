@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts;
+namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Bridge\Doctrine\CollectionInterfaceBridge;
 

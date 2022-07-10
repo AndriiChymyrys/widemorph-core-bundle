@@ -12,6 +12,8 @@
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface"/>
             <argument type="service" key="$selectDataSourceService"
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface"/>
+            <argument type="service" key="$doctrineDataFilterContextFactory"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactoryInterface"/>
         </service>
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\DomainInteractionInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\DomainInteraction"/>

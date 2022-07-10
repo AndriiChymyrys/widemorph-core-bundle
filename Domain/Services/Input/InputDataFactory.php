@@ -6,7 +6,6 @@ namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\InputDataCollectionInterface;
 
 class InputDataFactory implements InputDataFactoryInterface
 {

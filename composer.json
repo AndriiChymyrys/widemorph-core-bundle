@@ -4,5 +4,8 @@
         "psr-4": {
             "WideMorph\\Morph\\Bundle\\MorphCoreBundle\\": ""
         }
+    },
+    "require": {
+        "knplabs/knp-paginator-bundle": "5.8.*"
     }
 }

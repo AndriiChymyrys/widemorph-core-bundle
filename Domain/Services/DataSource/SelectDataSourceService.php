@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\SelectDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface;
 
 /**
@@ -15,15 +16,16 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\D
 class SelectDataSourceService extends AbstractDataSourceService implements SelectDataSourceServiceInterface
 {
     /**
-     * @param string $sourceName
+     * {@inheritDoc}
      *
-     * @return OutputDataInterface
+     * TODO: Add FormType validation
      */
-    public function execute(string $sourceName): OutputDataInterface
+    public function execute(string $sourceName, ?array $input = null): OutputDataInterface
     {
+        /** @var SelectDataSourceDefinitionInterface $selectSource */
         $selectSource = $this->dataSourceRegistry->get(DataSourceRegistryInterface::SELECT_DATA_SOURCE_NAME, $sourceName);
         $outputData = $this->outputDataFactory->createOutputData();
-        $inputData = $this->inputDataFactory->fromRequest();
+        $inputData = $input ? $this->inputDataFactory->fromArray($input) : $this->inputDataFactory->fromRequest();
 
         if ($constraint = $selectSource->getConstraint()) {
             $this->constraintValidationService->validate($constraint, $inputData);
@@ -34,7 +36,8 @@ class SelectDataSourceService extends AbstractDataSourceService implements Selec
         }
 
         $source = $selectSource->getSource();
+        $pagination = $selectSource->getSourcePagination($inputData);
 
-        return $outputData->setSourceData($source->select($inputData));
+        return $outputData->setSourceData($source->select($inputData, $pagination));
     }
 }

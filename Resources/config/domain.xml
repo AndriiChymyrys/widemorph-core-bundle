@@ -73,5 +73,22 @@
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceService"/>
         <!-- DataSource -->
+        <!-- DataFilter -->
+        <service
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\Result\DoctrineDataFilterResult">
+            <argument type="service" key="$paginator" id="Knp\Component\Pager\PaginatorInterface"/>
+        </service>
+        <service
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactory">
+            <argument type="service" key="$eventDispatcher"
+                      id="Symfony\Component\EventDispatcher\EventDispatcherInterface"/>
+            <argument type="service" key="$entityManager" id="Doctrine\ORM\EntityManagerInterface"/>
+            <argument type="service" key="$doctrineDataFilterResult"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\Result\DoctrineDataFilterResult"/>
+        </service>
+        <service
+                id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactoryInterface"
+                alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactory"/>
+        <!-- DataFilter -->
     </services>
 </container>

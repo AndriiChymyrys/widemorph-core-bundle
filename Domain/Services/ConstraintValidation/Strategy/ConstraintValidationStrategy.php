@@ -6,8 +6,8 @@ namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValid
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataCollectionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\ConstraintValidationRulesInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\InputDataCollectionInterface;
 
 /**
  * Class ConstraintValidationStrategy

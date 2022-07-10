@@ -16,6 +16,9 @@ class OutputData implements OutputDataInterface
      */
     protected array $errors = [];
 
+    /**
+     * @var mixed|null
+     */
     protected mixed $sourceData = null;
 
     /**
@@ -52,5 +55,13 @@ class OutputData implements OutputDataInterface
         $this->sourceData = $sourceData;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasErrors(): bool
+    {
+        return !empty($this->errors);
     }
 }
