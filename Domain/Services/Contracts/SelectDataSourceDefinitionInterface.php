@@ -17,6 +17,11 @@ interface SelectDataSourceDefinitionInterface extends DataSourceDefinitionInterf
     public const SERVICE_TAG_NAME = 'select.data.source';
 
     /**
+     * @return SelectDataSourceInterface
+     */
+    public function getSource(): SelectDataSourceInterface;
+
+    /**
      * Return pagination array [page, perPage] return null if pagination don't need
      *
      * @param InputDataCollectionInterface $inputDataCollection

@@ -72,6 +72,12 @@
         </service>
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceService"/>
+
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceService"
+                 parent="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\AbstractDataSourceService">
+        </service>
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceServiceInterface"
+                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceService"/>
         <!-- DataSource -->
         <!-- DataFilter -->
         <service

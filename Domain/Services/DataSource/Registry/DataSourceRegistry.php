@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry;
 
-use WideMorph\Ims\Bundle\ImsProductBundle\Interaction\Bridge\MorphCore\SelectDataSourceDefinitionInterfaceBridge;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\DataSourceException;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\DataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\CreateDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\SelectDataSourceDefinitionInterface;
 
 /**
  * Class DataSourceRegistry
@@ -66,13 +67,26 @@ class DataSourceRegistry implements DataSourceRegistryInterface
 
         if (
             $source === DataSourceRegistryInterface::SELECT_DATA_SOURCE_NAME &&
-            !$definition instanceof SelectDataSourceDefinitionInterfaceBridge
+            !$definition instanceof SelectDataSourceDefinitionInterface
         ) {
             throw new DataSourceException(
                 sprintf(
                     'Data source "%s" should implement interface "%s"',
                     $source,
-                    SelectDataSourceDefinitionInterfaceBridge::class,
+                    SelectDataSourceDefinitionInterface::class,
+                )
+            );
+        }
+
+        if (
+            $source === DataSourceRegistryInterface::CREATE_DATA_SOURCE_NAME &&
+            !$definition instanceof CreateDataSourceDefinitionInterface
+        ) {
+            throw new DataSourceException(
+                sprintf(
+                    'Data source "%s" should implement interface "%s"',
+                    $source,
+                    CreateDataSourceDefinitionInterface::class,
                 )
             );
         }

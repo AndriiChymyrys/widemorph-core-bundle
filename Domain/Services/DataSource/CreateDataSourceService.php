@@ -5,23 +5,19 @@ declare(strict_types=1);
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\SelectDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\CreateDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface;
 
-/**
- * Class SelectDataSourceService
- *
- * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource
- */
-class SelectDataSourceService extends AbstractDataSourceService implements SelectDataSourceServiceInterface
+class CreateDataSourceService extends AbstractDataSourceService implements CreateDataSourceServiceInterface
 {
-    /**
-     * {@inheritDoc}
-     */
     public function execute(string $sourceName, ?array $input = null): OutputDataInterface
     {
-        /** @var SelectDataSourceDefinitionInterface $selectSource */
-        $selectSource = $this->dataSourceRegistry->get(DataSourceRegistryInterface::SELECT_DATA_SOURCE_NAME, $sourceName);
+        /** @var CreateDataSourceDefinitionInterface $selectSource */
+        $selectSource = $this->dataSourceRegistry->get(
+            DataSourceRegistryInterface::CREATE_DATA_SOURCE_NAME,
+            $sourceName
+        );
+
         $outputData = $this->outputDataFactory->createOutputData();
         $inputData = $input ? $this->inputDataFactory->fromArray($input) : $this->inputDataFactory->fromRequest();
 
@@ -32,8 +28,9 @@ class SelectDataSourceService extends AbstractDataSourceService implements Selec
         }
 
         $source = $selectSource->getSource();
-        $pagination = $selectSource->getSourcePagination($inputData);
 
-        return $outputData->setSourceData($source->select($inputData, $pagination));
+        $data = $inputData->isEmpty() ? [] : $source->create($inputData);
+
+        return $outputData->setSourceData($data);
     }
 }

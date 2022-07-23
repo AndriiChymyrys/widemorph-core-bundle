@@ -34,4 +34,9 @@ interface OutputDataInterface
      * @return $this
      */
     public function setSourceData(mixed $sourceData): self;
+
+    /**
+     * @return bool
+     */
+    public function hasErrors(): bool;
 }

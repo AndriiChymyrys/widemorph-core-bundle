@@ -6,6 +6,7 @@ namespace WideMorph\Morph\Bundle\MorphCoreBundle\Interaction;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactoryInterface;
 
@@ -35,4 +36,9 @@ interface DomainInteractionInterface
      * @return DoctrineDataFilterContextFactoryInterface
      */
     public function getDoctrineDataFilterContextFactory(): DoctrineDataFilterContextFactoryInterface;
+
+    /**
+     * @return CreateDataSourceServiceInterface
+     */
+    public function getCreateDataSourceService(): CreateDataSourceServiceInterface;
 }

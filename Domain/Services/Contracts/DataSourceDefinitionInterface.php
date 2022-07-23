@@ -11,13 +11,4 @@ namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts;
  */
 interface DataSourceDefinitionInterface
 {
-    /**
-     * @return ConstraintValidationRulesInterface|null
-     */
-    public function getConstraint(): null|ConstraintValidationRulesInterface;
-
-    /**
-     * @return SelectDataSourceInterface
-     */
-    public function getSource(): SelectDataSourceInterface;
 }

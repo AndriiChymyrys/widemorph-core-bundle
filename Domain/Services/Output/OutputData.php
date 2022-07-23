@@ -58,7 +58,7 @@ class OutputData implements OutputDataInterface
     }
 
     /**
-     * @return bool
+     * {@inheritDoc}
      */
     public function hasErrors(): bool
     {
