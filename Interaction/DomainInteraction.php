@@ -7,6 +7,7 @@ namespace WideMorph\Morph\Bundle\MorphCoreBundle\Interaction;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceServiceInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\UpdateDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactoryInterface;
 
@@ -23,13 +24,15 @@ class DomainInteraction implements DomainInteractionInterface
      * @param SelectDataSourceServiceInterface $selectDataSourceService
      * @param DoctrineDataFilterContextFactoryInterface $doctrineDataFilterContextFactory
      * @param CreateDataSourceServiceInterface $createDataSourceService
+     * @param UpdateDataSourceServiceInterface $updateDataSourceService
      */
     public function __construct(
         protected EntityResolverFactoryInterface $entityResolverFactory,
         protected ConstraintValidationServiceInterface $constraintValidationService,
         protected SelectDataSourceServiceInterface $selectDataSourceService,
         protected DoctrineDataFilterContextFactoryInterface $doctrineDataFilterContextFactory,
-        protected CreateDataSourceServiceInterface $createDataSourceService
+        protected CreateDataSourceServiceInterface $createDataSourceService,
+        protected UpdateDataSourceServiceInterface $updateDataSourceService,
     ) {
     }
 
@@ -71,5 +74,13 @@ class DomainInteraction implements DomainInteractionInterface
     public function getCreateDataSourceService(): CreateDataSourceServiceInterface
     {
         return $this->createDataSourceService;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdateDataSourceService(): UpdateDataSourceServiceInterface
+    {
+        return $this->updateDataSourceService;
     }
 }

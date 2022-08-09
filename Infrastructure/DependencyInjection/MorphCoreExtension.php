@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\SelectDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\CreateDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\UpdateDataSourceDefinitionInterface;
 
 /**
  * Class MorphCoreExtension
@@ -28,6 +29,9 @@ class MorphCoreExtension extends Extension
 
         $container->registerForAutoconfiguration(CreateDataSourceDefinitionInterface::class)
             ->addTag(CreateDataSourceDefinitionInterface::SERVICE_TAG_NAME);
+
+        $container->registerForAutoconfiguration(UpdateDataSourceDefinitionInterface::class)
+            ->addTag(UpdateDataSourceDefinitionInterface::SERVICE_TAG_NAME);
 
         $loader = new XmlFileLoader(
             $container,

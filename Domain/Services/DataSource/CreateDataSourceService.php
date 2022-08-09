@@ -8,8 +8,16 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataInte
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\CreateDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface;
 
+/**
+ * Class CreateDataSourceService
+ *
+ * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource
+ */
 class CreateDataSourceService extends AbstractDataSourceService implements CreateDataSourceServiceInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function execute(string $sourceName, ?array $input = null): OutputDataInterface
     {
         /** @var CreateDataSourceDefinitionInterface $selectSource */
@@ -19,8 +27,6 @@ class CreateDataSourceService extends AbstractDataSourceService implements Creat
         );
 
         [$inputData, $outputData] = $this->initInputOutput($input);
-
-        $this->processConstraintValidation($selectSource, $inputData, $outputData);
 
         $this->dataProcessing($selectSource, $inputData, $outputData);
 
