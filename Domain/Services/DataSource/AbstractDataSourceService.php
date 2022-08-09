@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\ConstraintViolationList;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactoryInterface;
@@ -24,11 +26,17 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\
 class AbstractDataSourceService
 {
     /**
+     * @var Request|null
+     */
+    protected ?Request $request;
+
+    /**
      * @param DataSourceRegistryInterface $dataSourceRegistry
      * @param InputDataFactoryInterface $inputDataFactory
      * @param ConstraintValidationServiceInterface $constraintValidationService
      * @param OutputDataFactoryInterface $outputDataFactory
      * @param FormFactoryInterface $formFactory
+     * @param RequestStack $requestStack
      */
     public function __construct(
         protected DataSourceRegistryInterface $dataSourceRegistry,
@@ -36,7 +44,9 @@ class AbstractDataSourceService
         protected ConstraintValidationServiceInterface $constraintValidationService,
         protected OutputDataFactoryInterface $outputDataFactory,
         protected FormFactoryInterface $formFactory,
+        RequestStack $requestStack
     ) {
+        $this->request = $requestStack->getMainRequest();
     }
 
     /**
@@ -59,10 +69,34 @@ class AbstractDataSourceService
      * @param DataSourceDefinitionInterface $dataSourceDefinition
      * @param InputDataCollectionInterface $inputData
      * @param OutputDataInterface $outputData
+     * @param mixed|null $initData
      *
      * @return void
      */
-    protected function processValidation(
+    protected function dataProcessing(
+        DataSourceDefinitionInterface $dataSourceDefinition,
+        InputDataCollectionInterface $inputData,
+        OutputDataInterface $outputData,
+        mixed $initData = null,
+    ): void {
+        if ($dataSourceDefinition instanceof ConstraintDataSourceDefinitionInterface) {
+            $this->processConstraintValidation($dataSourceDefinition, $inputData, $outputData);
+        }
+
+        if ($dataSourceDefinition instanceof FormDataSourceDefinitionInterface) {
+            $this->createForm($dataSourceDefinition, $inputData, $initData);
+            $this->processForm($inputData, $outputData);
+        }
+    }
+
+    /**
+     * @param DataSourceDefinitionInterface $dataSourceDefinition
+     * @param InputDataCollectionInterface $inputData
+     * @param OutputDataInterface $outputData
+     *
+     * @return void
+     */
+    protected function processConstraintValidation(
         DataSourceDefinitionInterface $dataSourceDefinition,
         InputDataCollectionInterface $inputData,
         OutputDataInterface $outputData
@@ -77,17 +111,66 @@ class AbstractDataSourceService
         }
     }
 
-    protected function processForm(
+    /**
+     * @param DataSourceDefinitionInterface $dataSourceDefinition
+     * @param InputDataCollectionInterface $inputData
+     * @param mixed $initData
+     *
+     * @return void
+     */
+    protected function createForm(
         DataSourceDefinitionInterface $dataSourceDefinition,
         InputDataCollectionInterface $inputData,
-        OutputDataInterface $outputData
-    ) {
+        mixed $initData = null
+    ): void {
         if ($dataSourceDefinition instanceof FormDataSourceDefinitionInterface) {
             $form = $this->formFactory->create(
                 $dataSourceDefinition->getForm(),
-                $inputData->toArray(),
+                $initData,
                 $dataSourceDefinition->getFormOptions()
             );
+
+            $inputData->setForm($form);
         }
+    }
+
+    /**
+     * @param InputDataCollectionInterface $inputData
+     * @param OutputDataInterface $outputData
+     *
+     * @return void
+     */
+    protected function processForm(InputDataCollectionInterface $inputData, OutputDataInterface $outputData): void
+    {
+        if ($inputData->hasForm() && $form = $inputData->getForm()) {
+            $name = $form->getName();
+            $formData = $inputData->get($name);
+
+            if (!$formData && $this->request->getMethod() === 'GET') {
+                // Do not submit form when GET method if there is no data with form name
+                return;
+            }
+
+            $form->submit($formData ?? $inputData->toArray());
+
+            if (!$form->isValid()) {
+                $outputData->setErrors($form->getErrors(true));
+            }
+        }
+    }
+
+    /**
+     * @param array|null $input
+     *
+     * @return array
+     */
+    protected function initInputOutput(?array $input = null): array
+    {
+        $outputData = $this->outputDataFactory->createOutputData();
+        $inputData = $input ? $this->inputDataFactory->fromArray($input) : $this->inputDataFactory->fromRequest();
+
+        $outputData->setInputData($inputData);
+
+        return [$inputData, $outputData];
     }
 }

@@ -65,6 +65,8 @@
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface"/>
             <argument type="service" key="$outputDataFactory"
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataFactoryInterface"/>
+            <argument type="service" key="$formFactory" id="Symfony\Component\Form\FormFactoryInterface"/>
+            <argument type="service" key="$requestStack" id="Symfony\Component\HttpFoundation\RequestStack"/>
         </service>
 
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceService"

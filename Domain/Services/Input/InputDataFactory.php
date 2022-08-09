@@ -50,12 +50,22 @@ class InputDataFactory implements InputDataFactoryInterface
         $input = $this->request->request->all();
         $input += $this->request->query->all();
 
-        if ('' !== $content = $this->request->getContent()) {
+        if ($this->isJsonBody() && '' !== $content = $this->request->getContent()) {
             $json = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
             $input += $json;
         }
 
         return $input;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isJsonBody(): bool
+    {
+        $contentType = $this->request->headers->get('content-type');
+
+        return $contentType === 'application/json';
     }
 }

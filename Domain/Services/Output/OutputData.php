@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output;
 
+use Symfony\Component\Form\FormErrorIterator;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataCollectionInterface;
+
 /**
  * Class OutputData
  *
@@ -12,9 +15,9 @@ namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output;
 class OutputData implements OutputDataInterface
 {
     /**
-     * @var array
+     * @var null|array|FormErrorIterator
      */
-    protected array $errors = [];
+    protected null|array|FormErrorIterator $errors = null;
 
     /**
      * @var mixed|null
@@ -22,9 +25,14 @@ class OutputData implements OutputDataInterface
     protected mixed $sourceData = null;
 
     /**
+     * @var InputDataCollectionInterface
+     */
+    protected InputDataCollectionInterface $inputDataCollection;
+
+    /**
      * {@inheritDoc}
      */
-    public function setErrors(array $errors): self
+    public function setErrors(FormErrorIterator|array $errors): self
     {
         $this->errors = $errors;
 
@@ -34,7 +42,7 @@ class OutputData implements OutputDataInterface
     /**
      * {@inheritDoc}
      */
-    public function getErrors(): array
+    public function getErrors(): array|FormErrorIterator
     {
         return $this->errors;
     }
@@ -62,6 +70,24 @@ class OutputData implements OutputDataInterface
      */
     public function hasErrors(): bool
     {
-        return !empty($this->errors);
+        return null !== $this->errors;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getInputData(): InputDataCollectionInterface
+    {
+        return $this->inputDataCollection;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setInputData(InputDataCollectionInterface $inputDataCollection): self
+    {
+        $this->inputDataCollection = $inputDataCollection;
+
+        return $this;
     }
 }

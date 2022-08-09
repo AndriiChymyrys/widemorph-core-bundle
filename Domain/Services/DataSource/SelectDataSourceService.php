@@ -22,10 +22,10 @@ class SelectDataSourceService extends AbstractDataSourceService implements Selec
     {
         /** @var SelectDataSourceDefinitionInterface $selectSource */
         $selectSource = $this->dataSourceRegistry->get(DataSourceRegistryInterface::SELECT_DATA_SOURCE_NAME, $sourceName);
-        $outputData = $this->outputDataFactory->createOutputData();
-        $inputData = $input ? $this->inputDataFactory->fromArray($input) : $this->inputDataFactory->fromRequest();
 
-        $this->processValidation($selectSource, $inputData, $outputData);
+        [$inputData, $outputData] = $this->initInputOutput($input);
+
+        $this->processConstraintValidation($selectSource, $inputData, $outputData);
 
         if ($outputData->hasErrors()) {
             return $outputData;

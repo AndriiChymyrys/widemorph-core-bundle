@@ -18,10 +18,11 @@ class CreateDataSourceService extends AbstractDataSourceService implements Creat
             $sourceName
         );
 
-        $outputData = $this->outputDataFactory->createOutputData();
-        $inputData = $input ? $this->inputDataFactory->fromArray($input) : $this->inputDataFactory->fromRequest();
+        [$inputData, $outputData] = $this->initInputOutput($input);
 
-        $this->processValidation($selectSource, $inputData, $outputData);
+        $this->processConstraintValidation($selectSource, $inputData, $outputData);
+
+        $this->dataProcessing($selectSource, $inputData, $outputData);
 
         if ($outputData->hasErrors()) {
             return $outputData;
