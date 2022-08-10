@@ -27,17 +27,22 @@ class CreateDataSourceService extends AbstractDataSourceService implements Creat
         );
 
         [$inputData, $outputData] = $this->initInputOutput($input);
+        $source = $selectSource->getSource();
+        $sourceData = [];
 
-        $this->dataProcessing($selectSource, $inputData, $outputData);
+        $this->createForm($selectSource, $inputData);
 
-        if ($outputData->hasErrors()) {
-            return $outputData;
+        if (!$inputData->isEmpty()) {
+            $outputData->setIsSubmitted(true);
+            $this->dataProcessing($selectSource, $inputData, $outputData);
+
+            if ($outputData->hasErrors()) {
+                return $outputData;
+            }
+
+            $sourceData = $source->create($inputData);
         }
 
-        $source = $selectSource->getSource();
-
-        $data = $inputData->isEmpty() ? [] : $source->create($inputData);
-
-        return $outputData->setSourceData($data);
+        return $outputData->setSourceData($sourceData);
     }
 }

@@ -69,7 +69,6 @@ class AbstractDataSourceService
      * @param DataSourceDefinitionInterface $dataSourceDefinition
      * @param InputDataCollectionInterface $inputData
      * @param OutputDataInterface $outputData
-     * @param mixed|null $initData
      *
      * @return void
      */
@@ -77,14 +76,12 @@ class AbstractDataSourceService
         DataSourceDefinitionInterface $dataSourceDefinition,
         InputDataCollectionInterface $inputData,
         OutputDataInterface $outputData,
-        mixed $initData = null,
     ): void {
         if ($dataSourceDefinition instanceof ConstraintDataSourceDefinitionInterface) {
             $this->processConstraintValidation($dataSourceDefinition, $inputData, $outputData);
         }
 
         if ($dataSourceDefinition instanceof FormDataSourceDefinitionInterface) {
-            $this->createForm($dataSourceDefinition, $inputData, $initData);
             $this->processForm($inputData, $outputData);
         }
     }

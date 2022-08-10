@@ -32,6 +32,7 @@ class UpdateDataSourceService extends AbstractDataSourceService implements Updat
         [$inputData, $outputData] = $this->initInputOutput($input);
         $source = $selectSource->getSource();
         $initData = $selectSource->getUpdateItem($options);
+        $sourceData = [];
 
         if (empty($initData)) {
             throw new DataSourceException(
@@ -39,13 +40,18 @@ class UpdateDataSourceService extends AbstractDataSourceService implements Updat
             );
         }
 
-        $this->dataProcessing($selectSource, $inputData, $outputData, $initData);
+        $this->createForm($selectSource, $inputData, $initData);
 
-        if ($outputData->hasErrors()) {
-            return $outputData;
+        if (!$inputData->isEmpty()) {
+            $outputData->setIsSubmitted(true);
+            $this->dataProcessing($selectSource, $inputData, $outputData);
+
+            if ($outputData->hasErrors()) {
+                return $outputData;
+            }
+
+            $sourceData = $source->update($inputData, $initData);
         }
-
-        $sourceData = $source->update($inputData, $initData);
 
         return $outputData->setSourceData($sourceData);
     }

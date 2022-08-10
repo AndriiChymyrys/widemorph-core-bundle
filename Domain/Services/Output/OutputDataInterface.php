@@ -44,6 +44,11 @@ interface OutputDataInterface
     public function hasErrors(): bool;
 
     /**
+     * @return bool
+     */
+    public function isSuccess(): bool;
+
+    /**
      * @return InputDataCollectionInterface
      */
     public function getInputData(): InputDataCollectionInterface;
@@ -54,4 +59,16 @@ interface OutputDataInterface
      * @return $this
      */
     public function setInputData(InputDataCollectionInterface $inputDataCollection): self;
+
+    /**
+     * @return bool
+     */
+    public function isSubmitted(): bool;
+
+    /**
+     * @param bool $isSubmitted
+     *
+     * @return $this
+     */
+    public function setIsSubmitted(bool $isSubmitted): self;
 }

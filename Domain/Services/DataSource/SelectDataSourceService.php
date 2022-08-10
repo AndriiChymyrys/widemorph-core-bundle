@@ -25,7 +25,7 @@ class SelectDataSourceService extends AbstractDataSourceService implements Selec
 
         [$inputData, $outputData] = $this->initInputOutput($input);
 
-        $this->processConstraintValidation($selectSource, $inputData, $outputData);
+        $this->dataProcessing($selectSource, $inputData, $outputData);
 
         if ($outputData->hasErrors()) {
             return $outputData;

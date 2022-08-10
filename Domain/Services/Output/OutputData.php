@@ -25,6 +25,11 @@ class OutputData implements OutputDataInterface
     protected mixed $sourceData = null;
 
     /**
+     * @var bool
+     */
+    protected bool $isSubmitted = false;
+
+    /**
      * @var InputDataCollectionInterface
      */
     protected InputDataCollectionInterface $inputDataCollection;
@@ -76,6 +81,14 @@ class OutputData implements OutputDataInterface
     /**
      * {@inheritDoc}
      */
+    public function isSuccess(): bool
+    {
+        return null === $this->errors;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getInputData(): InputDataCollectionInterface
     {
         return $this->inputDataCollection;
@@ -87,6 +100,24 @@ class OutputData implements OutputDataInterface
     public function setInputData(InputDataCollectionInterface $inputDataCollection): self
     {
         $this->inputDataCollection = $inputDataCollection;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isSubmitted(): bool
+    {
+        return $this->isSubmitted;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIsSubmitted(bool $isSubmitted): self
+    {
+        $this->isSubmitted = $isSubmitted;
 
         return $this;
     }
