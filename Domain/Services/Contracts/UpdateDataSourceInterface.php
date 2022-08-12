@@ -15,9 +15,9 @@ interface UpdateDataSourceInterface
 {
     /**
      * @param InputDataCollectionInterface $inputDataCollection
-     * @param mixed $updateData
+     * @param mixed $target
      *
      * @return mixed
      */
-    public function update(InputDataCollectionInterface $inputDataCollection, mixed $updateData): mixed;
+    public function update(InputDataCollectionInterface $inputDataCollection, mixed $target): mixed;
 }

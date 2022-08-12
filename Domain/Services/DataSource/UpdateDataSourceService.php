@@ -23,15 +23,15 @@ class UpdateDataSourceService extends AbstractDataSourceService implements Updat
      */
     public function execute(string $sourceName, ?array $input = null, ?array $options = []): OutputDataInterface
     {
-        /** @var UpdateDataSourceDefinitionInterface $selectSource */
-        $selectSource = $this->dataSourceRegistry->get(
+        /** @var UpdateDataSourceDefinitionInterface $updateSource */
+        $updateSource = $this->dataSourceRegistry->get(
             DataSourceRegistryInterface::UPDATE_DATA_SOURCE_NAME,
             $sourceName
         );
 
         [$inputData, $outputData] = $this->initInputOutput($input);
-        $source = $selectSource->getSource();
-        $initData = $selectSource->getUpdateItem($options);
+        $source = $updateSource->getSource();
+        $initData = $updateSource->getUpdateItem($options);
         $sourceData = [];
 
         if (empty($initData)) {
@@ -40,11 +40,11 @@ class UpdateDataSourceService extends AbstractDataSourceService implements Updat
             );
         }
 
-        $this->createForm($selectSource, $inputData, $initData);
+        $this->createForm($updateSource, $inputData, $initData);
 
         if (!$inputData->isEmpty()) {
             $outputData->setIsSubmitted(true);
-            $this->dataProcessing($selectSource, $inputData, $outputData);
+            $this->dataProcessing($updateSource, $inputData, $outputData);
 
             if ($outputData->hasErrors()) {
                 return $outputData;

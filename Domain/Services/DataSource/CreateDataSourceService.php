@@ -20,21 +20,21 @@ class CreateDataSourceService extends AbstractDataSourceService implements Creat
      */
     public function execute(string $sourceName, ?array $input = null): OutputDataInterface
     {
-        /** @var CreateDataSourceDefinitionInterface $selectSource */
-        $selectSource = $this->dataSourceRegistry->get(
+        /** @var CreateDataSourceDefinitionInterface $createSource */
+        $createSource = $this->dataSourceRegistry->get(
             DataSourceRegistryInterface::CREATE_DATA_SOURCE_NAME,
             $sourceName
         );
 
         [$inputData, $outputData] = $this->initInputOutput($input);
-        $source = $selectSource->getSource();
+        $source = $createSource->getSource();
         $sourceData = [];
 
-        $this->createForm($selectSource, $inputData);
+        $this->createForm($createSource, $inputData);
 
         if (!$inputData->isEmpty()) {
             $outputData->setIsSubmitted(true);
-            $this->dataProcessing($selectSource, $inputData, $outputData);
+            $this->dataProcessing($createSource, $inputData, $outputData);
 
             if ($outputData->hasErrors()) {
                 return $outputData;
