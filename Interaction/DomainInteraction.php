@@ -8,6 +8,7 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolver
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\UpdateDataSourceServiceInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\DeleteDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactoryInterface;
 
@@ -25,6 +26,7 @@ class DomainInteraction implements DomainInteractionInterface
      * @param DoctrineDataFilterContextFactoryInterface $doctrineDataFilterContextFactory
      * @param CreateDataSourceServiceInterface $createDataSourceService
      * @param UpdateDataSourceServiceInterface $updateDataSourceService
+     * @param DeleteDataSourceServiceInterface $deleteDataSourceService
      */
     public function __construct(
         protected EntityResolverFactoryInterface $entityResolverFactory,
@@ -33,6 +35,7 @@ class DomainInteraction implements DomainInteractionInterface
         protected DoctrineDataFilterContextFactoryInterface $doctrineDataFilterContextFactory,
         protected CreateDataSourceServiceInterface $createDataSourceService,
         protected UpdateDataSourceServiceInterface $updateDataSourceService,
+        protected DeleteDataSourceServiceInterface $deleteDataSourceService,
     ) {
     }
 
@@ -82,5 +85,13 @@ class DomainInteraction implements DomainInteractionInterface
     public function getUpdateDataSourceService(): UpdateDataSourceServiceInterface
     {
         return $this->updateDataSourceService;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeleteDataSourceService(): DeleteDataSourceServiceInterface
+    {
+        return $this->deleteDataSourceService;
     }
 }

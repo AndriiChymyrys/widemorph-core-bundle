@@ -8,6 +8,7 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectData
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\UpdateDataSourceServiceInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\DeleteDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactoryInterface;
 
@@ -47,4 +48,9 @@ interface DomainInteractionInterface
      * @return UpdateDataSourceServiceInterface
      */
     public function getUpdateDataSourceService(): UpdateDataSourceServiceInterface;
+
+    /**
+     * @return DeleteDataSourceServiceInterface
+     */
+    public function getDeleteDataSourceService(): DeleteDataSourceServiceInterface;
 }

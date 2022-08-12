@@ -10,6 +10,7 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\D
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\SelectDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\CreateDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\UpdateDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\DeleteDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface;
 
 class DataSourceCompilePass implements CompilerPassInterface
@@ -33,6 +34,7 @@ class DataSourceCompilePass implements CompilerPassInterface
             SelectDataSourceDefinitionInterface::SERVICE_TAG_NAME => DataSourceRegistryInterface::SELECT_DATA_SOURCE_NAME,
             CreateDataSourceDefinitionInterface::SERVICE_TAG_NAME => DataSourceRegistryInterface::CREATE_DATA_SOURCE_NAME,
             UpdateDataSourceDefinitionInterface::SERVICE_TAG_NAME => DataSourceRegistryInterface::UPDATE_DATA_SOURCE_NAME,
+            DeleteDataSourceDefinitionInterface::SERVICE_TAG_NAME => DataSourceRegistryInterface::DELETE_DATA_SOURCE_NAME,
         ];
 
         $registryDefinition = $container->getDefinition(DataSourceRegistry::class);
