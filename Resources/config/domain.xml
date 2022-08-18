@@ -93,6 +93,7 @@
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\DeleteDataSourceServiceInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\DeleteDataSourceService"/>
         <!-- DataSource -->
+
         <!-- DataFilter -->
         <service
                 id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\Result\DoctrineDataFilterResult">
@@ -110,5 +111,21 @@
                 id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactoryInterface"
                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataFilter\Doctrine\DoctrineDataFilterContextFactory"/>
         <!-- DataFilter -->
+
+        <!-- FormBuilder -->
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormFieldService">
+            <argument type="service" key="$eventDispatcher"
+                      id="Symfony\Component\EventDispatcher\EventDispatcherInterface"/>
+        </service>
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormFieldServiceInterface"
+                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormFieldService"/>
+
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderService" shared="false">
+            <argument type="service" key="$formFieldService"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormFieldServiceInterface"/>
+        </service>
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderServiceInterface"
+                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderService"/>
+        <!-- FormBuilder -->
     </services>
 </container>

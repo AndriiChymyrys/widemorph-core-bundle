@@ -151,13 +151,13 @@ class DoctrineDataFilterContext implements DoctrineDataFilterContextInterface
 
         $this->eventDispatcher->dispatch($event, $eventName);
 
-        if ($addFilters = $event->getAddFilters()) {
+        if ($addFilters = $event->getToAddFilters()) {
             foreach ($addFilters as [$filter, $priority]) {
                 $this->addFilter($filter, $priority);
             }
         }
 
-        if ($removeFilters = $event->getRemoveFilters()) {
+        if ($removeFilters = $event->getToRemoveFilters()) {
             foreach ($removeFilters as $removeFilter) {
                 $this->removeFilter($removeFilter);
             }

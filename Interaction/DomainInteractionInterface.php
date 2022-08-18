@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Interaction;
 
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderServiceInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\UpdateDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\DeleteDataSourceServiceInterface;
@@ -53,4 +54,9 @@ interface DomainInteractionInterface
      * @return DeleteDataSourceServiceInterface
      */
     public function getDeleteDataSourceService(): DeleteDataSourceServiceInterface;
+
+    /**
+     * @return FormBuilderServiceInterface
+     */
+    public function getFormBuilderService(): FormBuilderServiceInterface;
 }

@@ -16,7 +16,7 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\DoctrineDat
 class DoctrineDataFilterEvent extends Event
 {
     /** @var string */
-    public const NAME = 'doctrine.data.filter';
+    public const NAME = 'morph.doctrine.data.filter';
 
     /** @var array */
     protected array $removeFilters = [];
@@ -48,7 +48,7 @@ class DoctrineDataFilterEvent extends Event
     /**
      * @return array
      */
-    public function getRemoveFilters(): array
+    public function getToRemoveFilters(): array
     {
         return $this->removeFilters;
     }
@@ -66,7 +66,7 @@ class DoctrineDataFilterEvent extends Event
     /**
      * @return array
      */
-    public function getAddFilters(): array
+    public function getToAddFilters(): array
     {
         return $this->addFilters;
     }
@@ -77,7 +77,7 @@ class DoctrineDataFilterEvent extends Event
      *
      * @return void
      */
-    public function addFilters(DoctrineDataFilterStrategyInterface $dataFilterStrategy, int $priority): void
+    public function addFilter(DoctrineDataFilterStrategyInterface $dataFilterStrategy, int $priority): void
     {
         $this->addFilters[] = [$dataFilterStrategy, $priority];
     }
