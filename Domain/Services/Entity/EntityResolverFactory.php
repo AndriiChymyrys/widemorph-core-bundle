@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\AttachEntityException;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\BundleNotHaveEntityException;
@@ -28,8 +29,9 @@ class EntityResolverFactory implements EntityResolverFactoryInterface
 
     /**
      * @param Filesystem $fileSystem
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(protected Filesystem $fileSystem)
+    public function __construct(protected Filesystem $fileSystem, protected EntityManagerInterface $entityManager)
     {
     }
 
@@ -48,7 +50,7 @@ class EntityResolverFactory implements EntityResolverFactoryInterface
             throw new BundleNotHaveEntityException($bundleNamespace);
         }
 
-        $this->entityResolver = new EntityResolver();
+        $this->entityResolver = new EntityResolver($this->entityManager);
 
         return $this;
     }

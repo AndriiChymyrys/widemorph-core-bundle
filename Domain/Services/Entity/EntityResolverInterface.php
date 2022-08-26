@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * Class EntityResolverInterface
  *
@@ -25,4 +27,11 @@ interface EntityResolverInterface
      * @return string
      */
     public function getEntityName(string $entityName): string;
+
+    /**
+     * @param string $entityName
+     *
+     * @return EntityRepository
+     */
+    public function getEntityRepository(string $entityName): EntityRepository;
 }

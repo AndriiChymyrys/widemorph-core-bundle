@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\AttachEntityException;
 
 /**
@@ -13,6 +15,13 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\AttachEntityExceptio
  */
 class EntityResolver implements EntityResolverInterface
 {
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(protected EntityManagerInterface $entityManager)
+    {
+    }
+
     /**
      * @var array
      */
@@ -30,6 +39,8 @@ class EntityResolver implements EntityResolverInterface
 
     /**
      * {@inheritDoc}
+     *
+     * @throws AttachEntityException
      */
     public function getEntityName(string $entityName): string
     {
@@ -38,5 +49,17 @@ class EntityResolver implements EntityResolverInterface
         }
 
         return $this->entities[$entityName];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @throws AttachEntityException
+     */
+    public function getEntityRepository(string $entityName): EntityRepository
+    {
+        $entity = $this->getEntityName($entityName);
+
+        return $this->entityManager->getRepository($entity);
     }
 }
