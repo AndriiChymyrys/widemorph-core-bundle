@@ -1,15 +1,14 @@
 ## EntityResolver
 
 ### Purpose
-Fetch entity repository in bundles. After config all repositories and entities will be copied to `/src` folder, and you can not
-refer to entity repository from another bundle directly.
+Get entity namespace from `/src` project folder. 
 
 To get correct entity repository you need to create `EntityResolver` for specific bundle and attach entities which you want to use.
 
 For create `EntityResolver` there is `EntityResolverFactory`
 
 ```php
-$entityResolverFactory
+$entityResolver = $entityResolverFactory
     ->forBundle(ImsProductBundle::class)
     ->attachEntity('Product')
     ->get();
@@ -17,5 +16,14 @@ $entityResolverFactory
 
 In `forBundle` method you need to pass bundle namespace, and in `attachEntity` you need to pass entity name
 
-> entity name should be relative `Infrastructure/Entity` folder if bundle have subfolders then entity name should be
+> entity name should be relative to `Infrastructure/Entity` folder if bundle have subfolders then entity name should be
 > specified with subfolder name like `attachEntity('Subfolder/Product')`
+
+### Get Entity Name
+```php
+$entityName = $entityResolver->getEntityName('Product');
+```
+### Get Entity Repository
+```php
+$entityRepository = $entityResolver->getEntityRepository('Product');
+```
