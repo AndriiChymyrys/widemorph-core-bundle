@@ -128,5 +128,16 @@
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderServiceInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderService"/>
         <!-- FormBuilder -->
+
+        <!-- FormSubmit -->
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormSubmit\FormSubmitService">
+            <argument type="service" key="$inputDataFactory"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactoryInterface"/>
+            <argument type="service" key="$formFactory"
+                      id="Symfony\Component\Form\FormFactoryInterface"/>
+        </service>
+        <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormSubmit\FormSubmitServiceInterface"
+                 alias="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormSubmit\FormSubmitService"/>
+        <!-- FormSubmit -->
     </services>
 </container>

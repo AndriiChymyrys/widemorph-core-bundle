@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Interaction;
 
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormSubmit\FormSubmitServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface;
@@ -29,16 +30,18 @@ class DomainInteraction implements DomainInteractionInterface
      * @param UpdateDataSourceServiceInterface $updateDataSourceService
      * @param DeleteDataSourceServiceInterface $deleteDataSourceService
      * @param FormBuilderServiceInterface $formBuilderService
+     * @param FormSubmitServiceInterface $formSubmitService
      */
     public function __construct(
-        protected EntityResolverFactoryInterface $entityResolverFactory,
-        protected ConstraintValidationServiceInterface $constraintValidationService,
-        protected SelectDataSourceServiceInterface $selectDataSourceService,
-        protected DoctrineDataFilterContextFactoryInterface $doctrineDataFilterContextFactory,
-        protected CreateDataSourceServiceInterface $createDataSourceService,
-        protected UpdateDataSourceServiceInterface $updateDataSourceService,
-        protected DeleteDataSourceServiceInterface $deleteDataSourceService,
-        protected FormBuilderServiceInterface $formBuilderService,
+        protected readonly EntityResolverFactoryInterface $entityResolverFactory,
+        protected readonly ConstraintValidationServiceInterface $constraintValidationService,
+        protected readonly SelectDataSourceServiceInterface $selectDataSourceService,
+        protected readonly DoctrineDataFilterContextFactoryInterface $doctrineDataFilterContextFactory,
+        protected readonly CreateDataSourceServiceInterface $createDataSourceService,
+        protected readonly UpdateDataSourceServiceInterface $updateDataSourceService,
+        protected readonly DeleteDataSourceServiceInterface $deleteDataSourceService,
+        protected readonly FormBuilderServiceInterface $formBuilderService,
+        protected readonly FormSubmitServiceInterface $formSubmitService,
     ) {
     }
 
@@ -104,5 +107,13 @@ class DomainInteraction implements DomainInteractionInterface
     public function getFormBuilderService(): FormBuilderServiceInterface
     {
         return $this->formBuilderService;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFormSubmitService(): FormSubmitServiceInterface
+    {
+        return $this->formSubmitService;
     }
 }

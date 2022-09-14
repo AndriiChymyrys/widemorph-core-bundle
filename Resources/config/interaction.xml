@@ -22,6 +22,8 @@
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\DeleteDataSourceServiceInterface"/>
             <argument type="service" key="$formBuilderService"
                       id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderServiceInterface"/>
+            <argument type="service" key="$formSubmitService"
+                      id="WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormSubmit\FormSubmitServiceInterface"/>
         </service>
         <service id="WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\DomainInteractionInterface"
                  alias="WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\DomainInteraction"/>

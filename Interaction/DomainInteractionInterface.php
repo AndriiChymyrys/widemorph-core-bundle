@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Interaction;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity\EntityResolverFactoryInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormSubmit\FormSubmitServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\FormBuilder\FormBuilderServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\SelectDataSourceServiceInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\CreateDataSourceServiceInterface;
@@ -59,4 +60,9 @@ interface DomainInteractionInterface
      * @return FormBuilderServiceInterface
      */
     public function getFormBuilderService(): FormBuilderServiceInterface;
+
+    /**
+     * @return FormSubmitServiceInterface
+     */
+    public function getFormSubmitService(): FormSubmitServiceInterface;
 }
