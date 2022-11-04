@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\CreateDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\CreateDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface;
 
 /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts;
+namespace WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract;
 
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -10,7 +10,7 @@ use Symfony\Component\Validator\ConstraintViolationList;
 /**
  * Class ConstraintValidationRulesInterface
  *
- * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts
+ * @package WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract
  */
 interface ConstraintValidationRulesInterface
 {

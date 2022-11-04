@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\Strategy;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataCollectionInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\ConstraintValidationRulesInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\ConstraintValidationRulesInterface;
 
 /**
  * Class ConstraintValidationStrategyInterface

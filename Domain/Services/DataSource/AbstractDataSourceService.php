@@ -12,10 +12,10 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataInte
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataFactoryInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataFactoryInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Input\InputDataCollectionInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\DataSourceDefinitionInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\FormDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\DataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\FormDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\ConstraintDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\ConstraintDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\ConstraintValidation\ConstraintValidationServiceInterface;
 
 /**

@@ -6,7 +6,7 @@ namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\DataSourceException;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Output\OutputDataInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\UpdateDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\UpdateDataSourceDefinitionInterface;
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry\DataSourceRegistryInterface;
 
 /**

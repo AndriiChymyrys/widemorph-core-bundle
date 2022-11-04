@@ -8,10 +8,10 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\SelectDataSourceDefinitionInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\CreateDataSourceDefinitionInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\UpdateDataSourceDefinitionInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\DeleteDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\SelectDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\CreateDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\UpdateDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\DeleteDataSourceDefinitionInterface;
 
 /**
  * Class MorphCoreExtension

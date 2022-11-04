@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts;
+namespace WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource;
 
 /**
  * Class FormDataSourceDefinitionInterface
  *
- * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\DataSource
+ * @package WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource
  */
 interface FormDataSourceDefinitionInterface
 {

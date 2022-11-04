@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\DataSource\Registry;
 
 use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\DataSourceException;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\DataSourceDefinitionInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\CreateDataSourceDefinitionInterface;
-use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Contracts\SelectDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\DataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\CreateDataSourceDefinitionInterface;
+use WideMorph\Morph\Bundle\MorphCoreBundle\Interaction\Contract\DataSource\SelectDataSourceDefinitionInterface;
 
 /**
  * Class DataSourceRegistry
