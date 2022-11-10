@@ -15,7 +15,7 @@ interface SelectDataSourceInterface
 {
     /**
      * @param InputDataCollectionInterface $inputDataCollection
-     * @param array|null $pagination Pagination array [page, perPage]
+     * @param array<int, int>|null $pagination Pagination array [page, perPage]
      *
      * @return mixed
      */
