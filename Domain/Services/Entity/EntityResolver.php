@@ -45,7 +45,13 @@ class EntityResolver implements EntityResolverInterface
     public function getEntityName(string $entityName): string
     {
         if (!isset($this->entities[$entityName])) {
-            throw new AttachEntityException(sprintf('Entity %s not found in attached entities', $entityName));
+            throw new AttachEntityException(
+                sprintf(
+                    'Entity %s not found in attached entities. Attached are "%s"',
+                    $entityName,
+                    implode(',', array_keys($this->entities))
+                )
+            );
         }
 
         return $this->entities[$entityName];
