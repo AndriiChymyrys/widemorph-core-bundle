@@ -14,6 +14,10 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\EntityResolverInitia
  * Class EntityResolverFactory
  *
  * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services
+ *
+ * @deprecated
+ * Maybe it should be deleted, as we should always look on entity in App/Entity folder not in a bundle namespace.
+ * It would be better for code simplicity
  */
 class EntityResolverFactory implements EntityResolverFactoryInterface
 {

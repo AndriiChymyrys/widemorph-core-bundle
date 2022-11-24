@@ -12,6 +12,10 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\AttachEntityExceptio
  * Class EntityResolver
  *
  * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services
+ *
+ * @deprecated
+ * Maybe it should be deleted, as we should always look on entity in App/Entity folder not in a bundle namespace.
+ * It would be better for code simplicity
  */
 class EntityResolver implements EntityResolverInterface
 {
@@ -67,5 +71,13 @@ class EntityResolver implements EntityResolverInterface
         $entity = $this->getEntityName($entityName);
 
         return $this->entityManager->getRepository($entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEntityManager(): EntityManagerInterface
+    {
+        return $this->entityManager;
     }
 }

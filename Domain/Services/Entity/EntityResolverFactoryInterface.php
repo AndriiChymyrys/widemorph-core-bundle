@@ -11,6 +11,10 @@ use WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Exception\BundleNotHaveEntityE
  * Class EntityResolverFactoryInterface
  *
  * @package WideMorph\Morph\Bundle\MorphCoreBundle\Domain\Services\Entity
+ *
+ * @deprecated
+ * Maybe it should be deleted, as we should always look on entity in App/Entity folder not in a bundle namespace.
+ * It would be better for code simplicity
  */
 interface EntityResolverFactoryInterface
 {
